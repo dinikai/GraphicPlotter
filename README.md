@@ -9,3 +9,5 @@ Hello, it's simple graphic plotter.
 3. If you want, set line width, scale and drawing dots.
 
 > **If graph is incorrect, try to increment the step**
+
+![изображение](https://user-images.githubusercontent.com/81509646/197219690-69d9bfd7-cb25-4903-a010-8fe367ce8bb5.png)
