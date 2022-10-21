@@ -1,0 +1,94 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Plotter"; 
+}
+
+<h1>Graphic plotter</h1>
+<form method="post">
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <label><span class="italic times-new-roman">y=</span><input type="text" name="expression"
+                                                             class="input-expression italic" value="@Model.fields[0]" required />
+    </label><br /><br />
+    <label>Step: <input type="number" name="step" class="input-num" step="any"
+                     value="@Model.fields[1]" required />
+    </label><br><br />
+    <label>Range: <input type="number" name="min" class="input-num"
+               value="@Model.fields[2]" required />
+    </label> -
+    <input type="number" name="max" class="input-num"
+           value="@Model.fields[3]" required /><br /><br />
+    <label>Line width: <input type="number" name="width" class="input-num"
+                           value="@Model.fields[4]" required />
+    </label>
+    <label>Scale: <input type="number" name="scale" class="input-num"
+                      value="@Model.fields[5]" required />
+    </label><br><br />
+    <label>Draw dots: <input type="checkbox" name="dot"
+                          value="1" @{if (Model.dot) { <text>checked</text> }} />
+    </label><br><br />
+    <input type="submit" />
+</form><br />
+
+<script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext('2d');
+
+    const width = 500, height = 500;
+
+    ctx.beginPath();
+    ctx.strokeRect(0, 0, width, height);
+    
+    ctx.moveTo(width / 2, 0);
+    ctx.lineTo(width / 2, 500);
+    ctx.moveTo(0, height / 2);
+    ctx.lineTo(500, height / 2);
+    ctx.stroke();
+    ctx.closePath();
+</script>
+
+@if (Request.Method == "POST") {
+    <table>
+        <tr>
+            <td>X</td>
+            @for (int i = 0; i < Model.arrayLength; i++)
+            {
+                <td>@Math.Round(Model.X[i], 2)</td>
+            }
+        </tr>
+        <tr>
+            <td>Y</td>
+            @for (int i = 0; i < Model.arrayLength; i++)
+            {
+                <td>@Math.Round(Model.Y[i], 2)</td>
+            }
+        </tr>
+    </table>
+
+    <script>
+        ctx.beginPath();
+        ctx.strokeStyle = "#4287f5";
+        ctx.lineWidth = @Model.lineWidth;
+        @for (int i = 0; i < Model.arrayLength; i++) {
+            double x = @Model.X[i] * Model.scale + 250, y = @Model.Y[i] * -Model.scale + 250;
+            if (i == 0)
+            {
+                <text>
+                    ctx.moveTo(@x, @y);
+                </text>
+            } else {
+                <text>
+                    ctx.lineTo(@x, @y);
+                </text>
+            }
+            if (Model.dot)
+            {
+                <text>
+                    ctx.fillRect(@x - 2, @y - 2, 4, 4);
+                </text>
+            }
+        }
+        ctx.stroke();
+        ctx.closePath();
+    </script>
+}

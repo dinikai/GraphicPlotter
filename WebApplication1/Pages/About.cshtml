@@ -1,0 +1,19 @@
+﻿@page
+@model AboutModel
+@{
+    string dateTime = DateTime.Now.ToString();
+}
+
+<h1>О сайте</h1>
+<ul>
+    @{
+        for (int i = 0; i < Model.forMax; i++) {
+                    <li>@i</li>
+        }
+    }
+</ul>
+
+<p>
+    Today dateTime: @dateTime<br />
+    Random value: @Model.randomInt
+</p>

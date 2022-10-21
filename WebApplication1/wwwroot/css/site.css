@@ -1,0 +1,55 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+table, th, td {
+    border: solid 1px #000;
+    border-collapse: collapse;
+    font-size: 10px;
+}
+
+th, td {
+    padding: 2px;
+}
+
+th {
+    font-weight: bold;
+}
+
+.input-num {
+    width: 100px;
+}
+
+.input-expression {
+    width: 300px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+canvas {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.times-new-roman {
+    font-family: 'Times New Roman', Times, serif;
+}
